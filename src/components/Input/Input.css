@@ -1,0 +1,7 @@
+.input-error {
+  border: 1px solid #ea182c !important;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 .2rem #ea182d38 !important;
+}

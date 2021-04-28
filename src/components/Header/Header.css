@@ -1,0 +1,127 @@
+/* Animation */
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button.btn-menu {
+  background-color: var(--primary-color);
+  border: none;
+  height: auto;
+  outline: none;
+  width: 50px;
+}
+
+button.btn-menu .fa-times:before {
+  color: var(--secondary-color);
+  height: 50px;
+  vertical-align: middle;
+  width: 0.8rem;
+}
+
+button.btn-menu i {
+  color: var(--secondary-color);
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.header {
+  background-color: #282c34;
+  padding: 19px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+}
+
+.logos img {
+  animation: App-logo-spin infinite 20s linear;
+  margin-left: -7px;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 4.2rem;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.menu.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu a {
+  border-bottom: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-size: 20px;
+  margin: 0 30px;
+  padding: 15px 0;
+  text-decoration: none;
+}
+
+.menu a:last-child {
+  border-bottom: none;
+}
+
+.menu a:hover {
+  color: var(--secondary-color);
+}
+
+.none {
+  display: none;
+}
+
+.active-nav-background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 992px) {
+  button.btn-menu {
+    display: none;
+  }
+
+  .menu {
+    position: static;
+    width: auto;
+    flex-direction: row;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .menu a {
+    text-transform: uppercase;
+    border-bottom: none;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+  }
+
+  .menu a:last-child {
+    padding-right: 0;
+  }
+
+  .menu a:hover {
+    background-color: transparent;
+  }
+}
