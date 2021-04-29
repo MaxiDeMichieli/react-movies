@@ -17,7 +17,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header token={token} setToken={setToken} />
       <div className="container main-container">
         <Switch>
           <Route path="/" exact>

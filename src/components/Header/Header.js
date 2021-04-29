@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ token, setToken }) => {
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(!show);
   const closeNav = () => setShow(false);
+
+  const logout = () => {
+    closeNav();
+    window.localStorage.removeItem('_Token');
+    setToken(null);
+  }
 
   return (
     <>
@@ -37,12 +43,21 @@ const Header = () => {
               </Link>
             </>
             <div className="flex-grow-1 d-flex justify-content-end">
-              <Button
-                to="/signin"
-                text="Iniciar Sesión"
-                className="btn btn-outline-light justify-self-end my-3 my-lg-0"
-                onClick={closeNav}
-              />
+              {token ? (
+                <Button
+                  to="/signin"
+                  text="Cerrar Sesión"
+                  className="btn btn-outline-light justify-self-end my-3 my-lg-0"
+                  onClick={logout}
+                />
+              ) : (
+                <Button
+                  to="/signin"
+                  text="Iniciar Sesión"
+                  className="btn btn-outline-light justify-self-end my-3 my-lg-0"
+                  onClick={closeNav}
+                />
+              )}
             </div>
           </nav>
         </section>

@@ -5,7 +5,7 @@ const PrivateRoute = ({ children, token, setToken }) => {
   useEffect(() => {
     const storageToken = window.localStorage.getItem('_Token');
     setToken(storageToken);
-  }, [token])
+  }, [setToken])
 
   return <>{token ? children : <Redirect to="/signin" />}</>;
 };
@@ -14,7 +14,7 @@ const PublicRoute = ({ children, token, setToken }) => {
   useEffect(() => {
     const storageToken = window.localStorage.getItem('_Token');
     setToken(storageToken);
-  }, [token])
+  }, [setToken])
 
   return <>{!token ? children : <Redirect to="/" />}</>;
 };

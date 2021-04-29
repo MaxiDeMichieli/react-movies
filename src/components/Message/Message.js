@@ -22,6 +22,7 @@ const Message = ({ show, setShow, message, variant = 'warning', time }) => {
             className="btn-close"
             data-bs-dismiss="alert"
             aria-label="Close"
+            onClick={() => setShow(false)}
           ></button>
         </div>
       ) : null}

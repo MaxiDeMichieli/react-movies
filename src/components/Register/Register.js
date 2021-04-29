@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import validations from '../../validations/registerValidations';
 import Button from '../Button/index';
 import Input from '../Input';
-import http from '../../API/http';
+import userService from '../../API/services/user';
 
 const Register = ({ className, setToken }) => {
   const {
@@ -18,10 +18,9 @@ const Register = ({ className, setToken }) => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await http.post('register', data);
+      const response = await userService.register(data);
       window.localStorage.setItem('_Token', response.data.token);
       setToken(response.data.token);
-      console.log(response.data);
       history.push('/');
     } catch (error) {
       console.log(error);

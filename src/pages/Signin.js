@@ -30,7 +30,7 @@ const SignIn = ({ setToken }) => {
           </p>
         )}
       </div>
-      {login ? <Login /> : <Register setToken={setToken} />}
+      {login ? <Login setToken={setToken} /> : <Register setToken={setToken} />}
     </>
   );
 };
