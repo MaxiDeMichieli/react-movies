@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Login from '../components/Login';
 import Register from '../components/Register';
 
-const SignIn = () => {
+const SignIn = ({ setToken }) => {
   const [login, setLogin] = useState(true);
 
   return (
@@ -30,7 +30,7 @@ const SignIn = () => {
           </p>
         )}
       </div>
-      {login ? <Login /> : <Register />}
+      {login ? <Login /> : <Register setToken={setToken} />}
     </>
   );
 };

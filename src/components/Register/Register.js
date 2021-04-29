@@ -1,17 +1,33 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import validations from '../../validations/registerValidations';
 import Button from '../Button/index';
 import Input from '../Input';
+import http from '../../API/http';
 
-const Register = ({ className }) => {
+const Register = ({ className, setToken }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+      const response = await http.post('register', data);
+      window.localStorage.setItem('_Token', response.data.token);
+      setToken(response.data.token);
+      console.log(response.data);
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -21,7 +37,7 @@ const Register = ({ className }) => {
           <h3 className="text-center pb-3">Registrate</h3>
         </div>
         <div className="col-12 col-md-9">
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               className="col-12"
               name="email"
@@ -42,7 +58,7 @@ const Register = ({ className }) => {
               error={errors.pass}
             />
 
-            <Button type="submit" text="ENVIAR" />
+            <Button type="submit" text="ENVIAR" loading={loading} />
           </form>
         </div>
       </div>
