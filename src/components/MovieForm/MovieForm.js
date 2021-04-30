@@ -1,10 +1,11 @@
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 import Input from '../Input';
 import Button from '../Button';
 import validations from '../../validations/movieValidations';
 import Select from '../Select';
-import genresMock from '../../mocks/genresMock';
+import genresService from '../../API/services/genres';
 
 const MovieForm = ({ movie, submit, loading }) => {
   const {
@@ -12,6 +13,20 @@ const MovieForm = ({ movie, submit, loading }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await genresService.getAll();
+        console.log(response.data.data);
+        setGenres(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchGenres();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(submit)} className="row">
@@ -71,7 +86,7 @@ const MovieForm = ({ movie, submit, loading }) => {
         error={errors.length}
         defaultValue={movie ? movie.length : null}
       />
-      {genresMock.length ? (
+      {genres.length ? (
         <Select
           className="col-12 col-sm-6"
           name="genre_id"
@@ -81,7 +96,7 @@ const MovieForm = ({ movie, submit, loading }) => {
           register={register}
           validation={validations.genre_id}
           error={errors.genre_id}
-          options={genresMock}
+          options={genres}
           defaultValue={movie ? movie.genre_id : null}
         />
       ) : null}

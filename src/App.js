@@ -9,6 +9,7 @@ import Signin from './pages/Signin';
 import NotFound from './pages/NotFound';
 import AuthProvider from './components/AuthProvider';
 import './App.css';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 const { PrivateRoute, PublicRoute } = AuthProvider;
 
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header token={token} setToken={setToken} />
       <div className="container main-container">
         <Switch>
